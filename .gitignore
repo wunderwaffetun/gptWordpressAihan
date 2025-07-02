@@ -1,0 +1,8 @@
+# Игнорируем всё, кроме wp-content
+/*
+!.gitignore
+!wp-content/
+
+# Конфиденциальное
+.env
+.env.local
