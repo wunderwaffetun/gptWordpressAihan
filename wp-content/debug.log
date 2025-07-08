@@ -220,3 +220,73 @@
 [02-Jul-2025 15:52:09 UTC]   Automatic theme updates starting...
 [02-Jul-2025 15:52:09 UTC]   Automatic theme updates complete.
 [02-Jul-2025 15:52:09 UTC] Automatic updates complete.
+[06-Jul-2025 20:40:05 UTC] Automatic updates starting...
+[06-Jul-2025 20:40:05 UTC]   Automatic plugin updates starting...
+[06-Jul-2025 20:40:05 UTC]   Automatic plugin updates complete.
+[06-Jul-2025 20:40:06 UTC]   Automatic theme updates starting...
+[06-Jul-2025 20:40:06 UTC]   Automatic theme updates complete.
+[06-Jul-2025 20:40:06 UTC] Automatic updates complete.
+[06-Jul-2025 21:36:31 UTC] PHP Fatal error:  Uncaught Error: Class 'PhpOffice\PhpWord\IOFactory' not found in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php:154
+Stack trace:
+#0 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(324): handle_gpt_request()
+#1 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters()
+#2 C:\OpenServer\domains\assistent\wp-includes\plugin.php(517): WP_Hook->do_action()
+#3 C:\OpenServer\domains\assistent\wp-admin\admin-ajax.php(192): do_action()
+#4 {main}
+  thrown in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php on line 154
+[06-Jul-2025 21:36:35 UTC] PHP Fatal error:  Uncaught Error: Class 'PhpOffice\PhpWord\IOFactory' not found in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php:154
+Stack trace:
+#0 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(324): handle_gpt_request()
+#1 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters()
+#2 C:\OpenServer\domains\assistent\wp-includes\plugin.php(517): WP_Hook->do_action()
+#3 C:\OpenServer\domains\assistent\wp-admin\admin-ajax.php(192): do_action()
+#4 {main}
+  thrown in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php on line 154
+[06-Jul-2025 21:37:54 UTC] PHP Fatal error:  Uncaught Error: Class 'PhpOffice\PhpWord\IOFactory' not found in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php:155
+Stack trace:
+#0 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(324): handle_gpt_request()
+#1 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters()
+#2 C:\OpenServer\domains\assistent\wp-includes\plugin.php(517): WP_Hook->do_action()
+#3 C:\OpenServer\domains\assistent\wp-admin\admin-ajax.php(192): do_action()
+#4 {main}
+  thrown in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php on line 155
+[06-Jul-2025 21:41:04 UTC] PHP Fatal error:  Uncaught Error: Class 'PhpOffice\PhpWord\IOFactory' not found in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php:156
+Stack trace:
+#0 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(324): handle_gpt_request()
+#1 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters()
+#2 C:\OpenServer\domains\assistent\wp-includes\plugin.php(517): WP_Hook->do_action()
+#3 C:\OpenServer\domains\assistent\wp-admin\admin-ajax.php(192): do_action()
+#4 {main}
+  thrown in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php on line 156
+[06-Jul-2025 21:46:52 UTC] PHP Fatal error:  Uncaught Error: Class 'PhpOffice\PhpWord\IOFactory' not found in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php:158
+Stack trace:
+#0 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(324): handle_gpt_request()
+#1 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters()
+#2 C:\OpenServer\domains\assistent\wp-includes\plugin.php(517): WP_Hook->do_action()
+#3 C:\OpenServer\domains\assistent\wp-admin\admin-ajax.php(192): do_action()
+#4 {main}
+  thrown in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php on line 158
+[06-Jul-2025 21:47:00 UTC] PHP Fatal error:  Uncaught Error: Class 'PhpOffice\PhpWord\IOFactory' not found in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php:158
+Stack trace:
+#0 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(324): handle_gpt_request()
+#1 C:\OpenServer\domains\assistent\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters()
+#2 C:\OpenServer\domains\assistent\wp-includes\plugin.php(517): WP_Hook->do_action()
+#3 C:\OpenServer\domains\assistent\wp-admin\admin-ajax.php(192): do_action()
+#4 {main}
+  thrown in C:\OpenServer\domains\assistent\wp-content\themes\assistents\functions.php on line 158
+[06-Jul-2025 22:06:20 UTC] PhpWord OK
+[06-Jul-2025 22:06:20 UTC] PdfParser OK
+[06-Jul-2025 22:06:24 UTC] PhpWord OK
+[06-Jul-2025 22:06:24 UTC] PdfParser OK
+[08-Jul-2025 06:58:59 UTC] Automatic updates starting...
+[08-Jul-2025 06:58:59 UTC]   Automatic plugin updates starting...
+[08-Jul-2025 06:58:59 UTC]   Automatic plugin updates complete.
+[08-Jul-2025 06:58:59 UTC]   Automatic theme updates starting...
+[08-Jul-2025 06:58:59 UTC]   Automatic theme updates complete.
+[08-Jul-2025 06:58:59 UTC] Automatic updates complete.
+[08-Jul-2025 12:05:54 UTC] Automatic updates starting...
+[08-Jul-2025 12:05:55 UTC]   Automatic plugin updates starting...
+[08-Jul-2025 12:05:55 UTC]   Automatic plugin updates complete.
+[08-Jul-2025 12:05:55 UTC]   Automatic theme updates starting...
+[08-Jul-2025 12:05:55 UTC]   Automatic theme updates complete.
+[08-Jul-2025 12:05:55 UTC] Automatic updates complete.
