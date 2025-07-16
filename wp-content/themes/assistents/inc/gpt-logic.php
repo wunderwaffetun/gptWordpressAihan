@@ -103,8 +103,9 @@ function handle_gpt_request() {
     $textarea = sanitize_text_field( $_POST['question'] ?? '' );
 
     // 5) Объединяем всё в единый промпт
-    $parts = array_filter([ $admin_text, $user_text, $textarea ]);
+    $parts = array_filter([ $admin_text, $textarea, $user_text ]);
     $prompt = implode("\n\n", $parts);
+    error_log($prompt);
     if ( ! trim($prompt) ) {
         wp_send_json_error([ 'message' => 'Нечего отправлять' ], 400 );
         exit;
@@ -116,11 +117,12 @@ function handle_gpt_request() {
         'body'    => wp_json_encode([
             'model'    => 'gpt-4o-mini',
             'messages' => [
-                [ 'role'=>'system', 'content'=> $prompt ]
+                [ 'role'=>'user', 'content'=> $prompt ]
             ],
         ]),
         'timeout' => 30,
     ]);
+    error_log(json_encode($resp));
     if ( is_wp_error($resp) ) {
         wp_send_json_error([ 'message' => 'Ошибка, повторите запрос' ], 500 );
         exit;
@@ -146,50 +148,3 @@ function handle_gpt_request() {
 /////////////////////////////////////////////////////////////////////////////////////////////////gpt-end
 
 // REST-эндпоинт для AJAX-проверки пользователя на существование email/ логина при регистрации 
-add_action('rest_api_init', function() {
-    register_rest_route('custom/v1', '/check-user', [
-        'methods'  => 'POST',
-        'callback' => 'custom_check_user_exists',
-        'permission_callback' => '__return_true',
-    ]);
-});
-
-/**
- * Callback для проверки существования username и email
- */
-function custom_check_user_exists(\WP_REST_Request $request) {
-    $params   = $request->get_json_params();
-    $username = sanitize_user($params['username'] ?? '');
-    $email    = sanitize_email($params['email'] ?? '');
-    $errors   = [];
-
-    if ($username && username_exists($username)) {
-        $errors['username'] = 'Пользователь уже существует';
-    }
-    if ($email && email_exists($email)) {
-        $errors['email'] = 'Email уже зарегистрирован';
-    }
-
-    $status = empty($errors) ? 200 : 400;
-    return new WP_REST_Response(['errors' => $errors], $status);
-}
-
-
-
-add_action('admin_init', function() {
-    // Если это AJAX-запрос к admin-ajax.php — пропускаем
-    if ( defined('DOING_AJAX') && DOING_AJAX ) { // Когда зареганный юзер отправлял запрос GPT, ему приходил в ответ html вместо ответа gpt из-за того, что его редиректило на /lk/, надо разрешить юзерам вызвать AJAX
-        return;
-    }
-    // Иначе редиректим не-админов
-    if ( ! current_user_can('manage_options') ) {
-        wp_redirect( home_url('/lk/') );
-        exit;
-    }
-});
-
-add_action('after_setup_theme', function() {
-    if ( ! current_user_can('administrator') ) {
-        show_admin_bar(false);
-    }
-});

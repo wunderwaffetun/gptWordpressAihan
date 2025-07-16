@@ -167,6 +167,28 @@
     margin: 0 12px;
     text-decoration: underline;
   }
+  .leader-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.leader-circle {
+  /* убираем фон‑круг */
+  background: none;
+  border-radius: 0;
+  padding: 0;
+}
+.leader-circle img {
+  width: 259px;
+  height: 450px;
+  object-fit: cover;
+  display: block;
+}
 </style>
 
 <!-- Hero -->
@@ -222,26 +244,32 @@
 <!-- Результат -->
 <section class="result-section">
   <h2>РЕЗУЛЬТАТ</h2>
+  <a href="https://disk.yandex.ru/i/4wZs2f0Qjxsk7A">Ссылка</a>
   <div class="video-wrapper">
-    <iframe
+    <div class="video-wrapper">
+    <video
       width="100%"
       height="400"
-      src="https://rutube.ru/play/embed/YOUR_VIDEO_ID"
-      frameborder="0"
-      allowfullscreen
-      allow="clipboard-write; autoplay"
-    ></iframe>
+      controls
+      preload="metadata"
+      src="<?php echo esc_url( 'http://soratniks.ru/wp-content/uploads/2025/07/026.mp4' ); ?>"
+    >
+      Ваш браузер не поддерживает видео.
+    </video>
   </div>
 </section>
-
 
 <!-- Кто лидер -->
 <section class="leader-section">
   <div class="leader-flex">
-    <div class="leader-circle"></div>
     <div class="leader-text">
       <h3>КТО ЛИДЕР</h3>
-      <p>Ирина Сафина — эксперт в legal-tech. Более 10 лет опыта в аналитике, автоматизации бизнес-процессов и цифровых продуктах.</p>
+      <p>Ирина Сафина — эксперт в legal‑tech. Более 10 лет опыта…</p>
+    </div>
+    <div class="leader-circle" style="position: relative; bottom: 15px;">
+      <img style="max-width: 130px; max-height: 225px"
+        src="<?php echo esc_url( get_template_directory_uri() . '../../../uploads/2025/07/photo_2025-07-15_17-09-51.jpg' ); ?>"
+      />
     </div>
   </div>
 </section>
@@ -256,9 +284,25 @@
 <!-- Footer -->
 <footer>
   <p>&copy; <?php echo date('Y'); ?> Soratniki</p>
-  <a href="/docs/privacy.pdf" target="_blank">Политика ПД</a> |
-  <a href="/docs/offer.pdf" target="_blank">Договор-оферта</a> |
-  <a href="/docs/requisites.pdf" target="_blank">Реквизиты</a>
+  <a 
+    href="http://assistent/wp-content/uploads/2025/07/Резюме_Системный_аналитик_Руслан_Владимирович_Щекотихин_от_02_04.pdf"
+    download="Политика_ПД.pdf"
+    target="_blank"
+  >
+    Политика ПД
+  </a> |
+  <a 
+    href="http://assistent/wp-content/uploads/2025/07/Резюме_Системный_аналитик_Руслан_Владимирович_Щекотихин_от_02_04.pdf"
+    download="Договор-оферта.pdf"
+    target="_blank"
+  >
+    Договор-оферта</a> |
+  <a 
+    href="http://assistent/wp-content/uploads/2025/07/Резюме_Системный_аналитик_Руслан_Владимирович_Щекотихин_от_02_04.pdf"
+    download="Реквизиты.pdf"
+    target="_blank"
+  >
+    Реквизиты</a>
   <br><br>
   <p>Контакты: <a href="mailto:soratniks@yandex.ru">soratniks@yandex.ru</a> | Telegram: <a href="https://t.me/SofLida" target="_blank">@SofLida</a></p>
 </footer>

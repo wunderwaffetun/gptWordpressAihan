@@ -9,6 +9,11 @@ Version: 1.0
 require_once ABSPATH . 'vendor/autoload.php'; // чтобы читались файлы 
 require_once __DIR__ . '/inc/balance-admin.php';
 require_once __DIR__ . '/inc/gpt-logic.php';
+require_once __DIR__ . '/inc/settings.php'; // чтобы изменять промокод в настройках админки 
+
+
+@ini_set( 'upload_max_size' , '1000M' );
+@ini_set( 'post_max_size', '1000M');
 
 function soratniki_enqueue_assets() {
     wp_enqueue_style('soratniki-style', get_stylesheet_uri());
@@ -84,3 +89,51 @@ function decrement_request_balance( $user_id ) {
     return $balance;
 }
 
+
+add_action('rest_api_init', function() {
+    register_rest_route('custom/v1', '/check-user', [
+        'methods'  => 'POST',
+        'callback' => 'custom_check_user_exists',
+        'permission_callback' => '__return_true',
+    ]);
+});
+
+/**
+ * Callback для проверки существования username и email
+ */
+function custom_check_user_exists(\WP_REST_Request $request) {
+    $params   = $request->get_json_params();
+    $username = sanitize_user($params['username'] ?? '');
+    $email    = sanitize_email($params['email'] ?? '');
+    $errors   = [];
+
+    if ($username && username_exists($username)) {
+        $errors['username'] = 'Пользователь уже существует';
+    }
+    if ($email && email_exists($email)) {
+        $errors['email'] = 'Email уже зарегистрирован';
+    }
+
+    $status = empty($errors) ? 200 : 400;
+    return new WP_REST_Response(['errors' => $errors], $status);
+}
+
+
+
+add_action('admin_init', function() {
+    // Если это AJAX-запрос к admin-ajax.php — пропускаем
+    if ( defined('DOING_AJAX') && DOING_AJAX ) { // Когда зареганный юзер отправлял запрос GPT, ему приходил в ответ html вместо ответа gpt из-за того, что его редиректило на /lk/, надо разрешить юзерам вызвать AJAX
+        return;
+    }
+    // Иначе редиректим не-админов
+    if ( ! current_user_can('manage_options') ) {
+        wp_redirect( home_url('/lk/') );
+        exit;
+    }
+});
+
+add_action('after_setup_theme', function() {
+    if ( ! current_user_can('administrator') ) {
+        show_admin_bar(false);
+    }
+});

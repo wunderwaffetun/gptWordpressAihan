@@ -91,6 +91,8 @@ get_header();
       box.innerHTML = DOMPurify.sanitize( marked.parse(data.data.response) );
       if (typeof data.data.remaining_calls === 'number') {
         balEl.textContent = data.data.remaining_calls;
+        fileInput.value = '';
+        input.value = '';
       }
     } catch (e) {
       console.error(e);

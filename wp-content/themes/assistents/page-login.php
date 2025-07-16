@@ -38,15 +38,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_submit'])) {
 
 // Определяем активную вкладку
 $default_tab = (isset($_GET['tab']) && $_GET['tab'] === 'register') ? 'register' : 'login';
-
 // Обработка регистрации
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register_submit'])) {
     $username = sanitize_user($_POST['reg_login']);
     $email    = sanitize_email($_POST['reg_email']);
     $pass     = $_POST['reg_password'];
     $pass2    = $_POST['reg_password2'];
+    $promo    = isset($_POST['reg_promo']) ? sanitize_text_field($_POST['reg_promo']) : '';
 
     $errors = new WP_Error();
+    $expected_promo = get_option('soratniki_promo_code', '');
+    if (empty($expected_promo) || $promo !== $expected_promo) {
+                                                     $errors->add('promo', 'Неверный промокод.');
+    }
     if (!validate_username($username))               $errors->add('username', 'Неверный логин');
     if (username_exists($username))                  $errors->add('username', 'Пользователь уже существует');
     if (!is_email($email))                           $errors->add('email', 'Неверный Email');
@@ -198,6 +202,9 @@ get_header();
         </p>
         <p>
           <input type="password" name="reg_password2" id="reg_password2" placeholder="Повторите пароль" required>
+        </p>
+        <p>
+          <input type="text" name="reg_promo" placeholder="Промокод" required>
         </p>
         <p><button type="submit" name="register_submit">Регистрация</button></p>
       </form>
