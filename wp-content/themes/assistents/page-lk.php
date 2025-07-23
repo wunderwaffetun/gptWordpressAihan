@@ -13,7 +13,6 @@ get_header();
 // Источники из админки
 $sources = get_option('soratniki_sources', []);
 $balance = get_request_balance( get_current_user_id() );
-error_log($sources);
 $ajax_url = admin_url('admin-ajax.php');
 $nonce    = wp_create_nonce('process_gpt');
 ?>
@@ -60,7 +59,7 @@ $nonce    = wp_create_nonce('process_gpt');
         if (!$id) continue;
         $label = $row['label'] ?: 'Без имени';
       ?>
-        <button type="button" class="src-btn" data-id="<?php echo esc_attr($id); ?>">
+        <button type="button" class="src-btn" data-id="<?php echo esc_attr($id); ?>" data-label="<?php echo esc_attr($label); ?>" >
           <?php echo esc_html($label); ?>
         </button>
       <?php endforeach; ?>
@@ -71,7 +70,9 @@ $nonce    = wp_create_nonce('process_gpt');
 
   <!-- Правая колонка: форма -->
   <section class="lk-box">
-    <div class="block-title">Профиль сотрудника</div>
+    <div class="block-title">
+      <?php echo $sources ? esc_html($sources[0]['label']) : 'Выбранный соратник'; ?>
+    </div>
 
     <div class="gpt-balance">
       <strong>Осталось запросов в GPT:</strong>
@@ -110,17 +111,30 @@ $nonce    = wp_create_nonce('process_gpt');
   const box       = document.getElementById('response-box');
   const balEl     = document.getElementById('remaining-calls');
   const srcBtns   = document.querySelectorAll('.src-btn');
+  const title     = document.querySelector('.block-title')
 
   let selectedSourceId = null;
 
+  // --- 1. Выбираем первый по умолчанию ---
+  function selectFirstSource() {
+    if (!srcBtns.length) { selectedSourceId = null; return; }
+    srcBtns.forEach(b => b.classList.remove('active'));
+    srcBtns[0].classList.add('active');
+    selectedSourceId = srcBtns[0].dataset.id;
+  }
+  selectFirstSource();
+
+  // --- 2. Клик по кнопкам источников ---
   srcBtns.forEach(btn => {
     btn.addEventListener('click', ()=>{
       srcBtns.forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
       selectedSourceId = btn.dataset.id;
+      title.innerHTML = btn.dataset.label;
     });
   });
 
+  // --- 3. Отправка ---
   sendBtn.addEventListener('click', async () => {
     const form = new FormData();
     form.append('action', 'process_gpt');
@@ -154,16 +168,17 @@ $nonce    = wp_create_nonce('process_gpt');
       box.innerHTML = '<p>Ошибка сервера, повторите позднее</p>';
     }
   });
-  console.log('selectedSourceId =', selectedSourceId);
+
+  // --- 4. Сброс ---
   resetBtn.addEventListener('click', () => {
     fileInput.value = '';
     input.value = '';
-    selectedSourceId = null;
-    srcBtns.forEach(b=>b.classList.remove('active'));
-    // опционально скрыть ответ:
-    // box.style.display = 'none'; box.innerHTML='';
+    box.style.display = 'none';
+    box.innerHTML = '';
+    selectFirstSource(); // снова первый
   });
 })();
+
 </script>
 
 <?php get_footer();
