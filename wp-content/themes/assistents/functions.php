@@ -10,6 +10,8 @@ require_once ABSPATH . 'vendor/autoload.php'; // чтобы читались ф�
 require_once __DIR__ . '/inc/balance-admin.php';
 require_once __DIR__ . '/inc/gpt-logic.php';
 require_once __DIR__ . '/inc/settings.php'; // чтобы изменять промокод в настройках админки 
+require_once __DIR__ . '/inc/sources-admin.php'; // страница с кнопками и файлами соратников
+
 
 
 @ini_set( 'upload_max_size' , '1000M' );
